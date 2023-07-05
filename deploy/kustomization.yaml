@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - deployment.yaml
 commonLabels:
-  app: code-ssh
+  app: code-tunnel
 images:
   - name: code-tunnel
     newName: ghcr.io/senseab/code-tunnel
