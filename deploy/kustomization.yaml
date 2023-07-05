@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization.json
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - service.yaml
+commonLabels:
+  app: code-ssh
+images:
+  - name: code-tunnel
+    newName: ghcr.io/senseab/code-tunnel
+    newTag: '20220814-1'

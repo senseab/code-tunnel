@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: code-tunnel
+  name: code-tunnel
+spec:
+  selector:
+    matchLabels:
+      app: code-tunnel
+  template:
+    metadata:
+      labels:
+        app: code-tunnel
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: Asia/Shanghai
+        image: code-tunnel
+        name: code-tunnel
+        resources:
+          limits:
+            cpu: "2"
+            memory: 4Gi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /home
+          name: data
+        - mountPath: /nix
+          name: nix
+      volumes:
+      - hostPath:
+          path: /data/nix
+          type: ""
+        name: nix
+      - hostPath:
+          path: /data/code-server
+          type: ""
+        name: data
